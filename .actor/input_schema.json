@@ -65,12 +65,7 @@
             "description": "Optional Apify Proxy or custom proxy configuration for protected network requests.",
             "editor": "proxy",
             "default": {
-                "useApifyProxy": true,
-                "apifyProxyGroups": ["RESIDENTIAL"]
-            },
-            "prefill": {
-                "useApifyProxy": true,
-                "apifyProxyGroups": ["RESIDENTIAL"]
+                "useApifyProxy": true
             }
         }
     },
