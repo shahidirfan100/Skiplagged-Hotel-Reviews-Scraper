@@ -1,0 +1,52 @@
+{
+    "actorSpecification": 1,
+    "views": {
+        "overview": {
+            "title": "Hotel reviews",
+            "transformation": {
+                "fields": [
+                    "hotel_id",
+                    "reviewer_name",
+                    "review_rating",
+                    "review_date",
+                    "positive_review",
+                    "negative_review",
+                    "hotel_url"
+                ]
+            },
+            "display": {
+                "component": "table",
+                "properties": {
+                    "hotel_id": {
+                        "label": "Hotel ID",
+                        "format": "number"
+                    },
+                    "reviewer_name": {
+                        "label": "Reviewer",
+                        "format": "text"
+                    },
+                    "review_rating": {
+                        "label": "Rating",
+                        "format": "number"
+                    },
+                    "review_date": {
+                        "label": "Date",
+                        "format": "date"
+                    },
+                    "positive_review": {
+                        "label": "Positive feedback",
+                        "format": "text"
+                    },
+                    "negative_review": {
+                        "label": "Negative feedback",
+                        "format": "text"
+                    },
+                    "hotel_url": {
+                        "label": "Hotel URL",
+                        "format": "link"
+                    }
+                }
+            }
+        }
+    }
+}

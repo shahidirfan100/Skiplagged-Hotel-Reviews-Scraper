@@ -1,0 +1,79 @@
+{
+    "title": "Skiplagged Hotel Reviews Scraper",
+    "description": "Collect public reviews from one or more Skiplagged hotel URLs with sorting, filtering, result limits, pagination caps, and optional proxy settings.",
+    "type": "object",
+    "schemaVersion": 1,
+    "properties": {
+        "startUrls": {
+            "title": "Skiplagged hotel URLs",
+            "type": "array",
+            "description": "One or more public Skiplagged hotel URLs. Hotel URLs with or without stay dates are supported.",
+            "editor": "stringList",
+            "prefill": ["https://skiplagged.com/hotel/76955/luxor-las-vegas-nevada"],
+            "items": {
+                "type": "string"
+            }
+        },
+        "sortBy": {
+            "title": "Sort reviews",
+            "type": "string",
+            "description": "Order reviews before they are saved.",
+            "editor": "select",
+            "enum": ["newest", "oldest", "highest_rating", "lowest_rating"],
+            "enumTitles": ["Newest first", "Oldest first", "Highest rating first", "Lowest rating first"],
+            "default": "newest",
+            "prefill": "newest"
+        },
+        "filter": {
+            "title": "Review filter",
+            "type": "string",
+            "description": "Keep all reviews, reviews with text, or reviews in a rating group.",
+            "editor": "select",
+            "enum": ["all", "with_text", "positive", "negative", "rating_8_plus", "rating_5_or_less"],
+            "enumTitles": [
+                "All reviews",
+                "Reviews with text",
+                "Positive reviews (8+)",
+                "Negative reviews (5 or less)",
+                "Rating 8 or higher",
+                "Rating 5 or lower"
+            ],
+            "default": "all",
+            "prefill": "all"
+        },
+        "results_wanted": {
+            "title": "Results wanted",
+            "type": "integer",
+            "description": "Maximum number of review records to save across all supplied hotel URLs.",
+            "minimum": 1,
+            "default": 20,
+            "prefill": 20,
+            "editor": "number"
+        },
+        "max_pages": {
+            "title": "Maximum review pages",
+            "type": "integer",
+            "description": "Maximum number of 50-review output pages to process per hotel. The source returns the available review set in one response, so this caps local batching.",
+            "minimum": 1,
+            "default": 10,
+            "prefill": 1,
+            "editor": "number"
+        },
+        "proxyConfiguration": {
+            "title": "Proxy configuration",
+            "type": "object",
+            "description": "Optional Apify Proxy or custom proxy configuration for protected network requests.",
+            "editor": "proxy",
+            "default": {
+                "useApifyProxy": true,
+                "apifyProxyGroups": ["RESIDENTIAL"]
+            },
+            "prefill": {
+                "useApifyProxy": true,
+                "apifyProxyGroups": ["RESIDENTIAL"]
+            }
+        }
+    },
+    "required": ["startUrls"],
+    "additionalProperties": false
+}

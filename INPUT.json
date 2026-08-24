@@ -1,0 +1,10 @@
+{
+    "startUrls": ["https://skiplagged.com/hotel/76955/luxor-las-vegas-nevada"],
+    "sortBy": "newest",
+    "filter": "all",
+    "results_wanted": 20,
+    "max_pages": 1,
+    "proxyConfiguration": {
+        "useApifyProxy": false
+    }
+}

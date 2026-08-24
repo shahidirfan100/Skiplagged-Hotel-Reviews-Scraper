@@ -1,0 +1,11 @@
+{
+    "actorOutputSchemaVersion": 1,
+    "title": "Skiplagged hotel review output",
+    "properties": {
+        "overview": {
+            "type": "string",
+            "title": "Review dataset",
+            "template": "{{links.apiDefaultDatasetUrl}}/items?view=overview"
+        }
+    }
+}
