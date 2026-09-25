@@ -169,12 +169,13 @@ async function run() {
         throw new Error('Provide at least one Skiplagged hotel URL in startUrls.');
     }
 
-    const { proxyConfiguration } = input;
-    const shouldUseProxy = Boolean(
-        proxyConfiguration?.useApifyProxy ||
-        (Array.isArray(proxyConfiguration?.proxyUrls) && proxyConfiguration.proxyUrls.length),
-    );
-    const proxy = shouldUseProxy ? await Actor.createProxyConfiguration(proxyConfiguration) : undefined;
+    const proxy = await Actor.createProxyConfiguration({
+        useApifyProxy: true,
+        groups: ['RESIDENTIAL'],
+    });
+    if (!proxy) {
+        throw new Error('Apify Residential Proxy is required but could not be configured.');
+    }
 
     log.info(
         `Starting Skiplagged hotel reviews run | urls=${urls.length} | results=${resultsWanted} | max_pages=${maxPages}`,
@@ -191,11 +192,11 @@ async function run() {
             continue;
         }
         seenHotelIds.add(target.hotelId);
-        const proxyUrl = proxy ? await proxy.newUrl() : undefined;
+        const proxyUrl = await proxy.newUrl();
         const client = new Impit({
             browser: 'chrome',
             ignoreTlsErrors: true,
-            ...(proxyUrl && { proxyUrl }),
+            proxyUrl,
         });
 
         const reviewEndpoint = `${API_ORIGIN}/api/hotel_review.php?hotel_id=${encodeURIComponent(target.hotelId)}`;

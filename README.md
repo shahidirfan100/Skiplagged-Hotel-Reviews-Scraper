@@ -43,14 +43,16 @@ Fields that Skiplagged does not publish for a particular review are left out of 
 
 ## Input Parameters
 
-| Parameter            | Type             | Required | Default                 | Description                                                                         |
-| -------------------- | ---------------- | -------: | ----------------------- | ----------------------------------------------------------------------------------- |
-| `startUrls`          | Array of strings |      Yes | Sample Luxor URL        | One or more Skiplagged hotel URLs.                                                  |
-| `sortBy`             | String           |       No | `newest`                | `newest`, `oldest`, `highest_rating`, or `lowest_rating`.                           |
-| `filter`             | String           |       No | `all`                   | `all`, `with_text`, `positive`, `negative`, `rating_8_plus`, or `rating_5_or_less`. |
-| `results_wanted`     | Integer          |       No | `20`                    | Maximum review records across the run.                                              |
-| `max_pages`          | Integer          |       No | `10`                    | Maximum 50-review output pages per hotel.                                           |
-| `proxyConfiguration` | Object           |       No | Residential Apify Proxy | Optional Apify Proxy or custom proxy settings.                                      |
+| Parameter            | Type             | Required                  | Default                 | Description                                                                                         |
+| -------------------- | ---------------- | ------------------------: | ----------------------- | --------------------------------------------------------------------------------------------------- |
+| `startUrls`          | Array of strings | Yes                       | Sample Luxor URL        | One or more Skiplagged hotel URLs.                                                                  |
+| `sortBy`             | String           | No                        | `newest`                | `newest`, `oldest`, `highest_rating`, or `lowest_rating`.                                           |
+| `filter`             | String           | No                        | `all`                   | `all`, `with_text`, `positive`, `negative`, `rating_8_plus`, or `rating_5_or_less`.                 |
+| `results_wanted`     | Integer          | No                        | `20`                    | Maximum review records across the run.                                                              |
+| `max_pages`          | Integer          | No                        | `10`                    | Maximum 50-review output pages per hotel.                                                           |
+| `proxyConfiguration` | Object           | Automatically enforced   | Residential Apify Proxy | Residential routing is mandatory; the Actor enables it even if this input is omitted or changed. |
+
+Residential Apify Proxy is required for requests to Skiplagged and is configured automatically. You do not need to provide proxy settings; the Actor always uses the Residential group and does not send direct requests. Your Apify account must have access to Residential Proxy, or the run will fail while configuring the proxy.
 
 The source returns the available review set in one response. `max_pages` is a safety cap on local 50-review batches, which lets you limit larger review runs.
 
@@ -117,6 +119,7 @@ Keep reviews scored 8 or higher and show the highest ratings first:
 - Use `with_text` when you need written feedback rather than score-only reviews.
 - Use `max_pages` to cap larger collections at predictable 50-review batches.
 - Review the dataset preview before scheduling repeated monitoring runs.
+- Ensure your Apify account has Residential Proxy access; proxy routing is mandatory.
 
 ## Integrations and exports
 
@@ -127,6 +130,10 @@ Apify datasets can be downloaded as JSON, CSV, Excel, XML, and other formats. Us
 ### Can I use a URL with dates?
 
 Yes. Hotel URLs with check-in and check-out segments are accepted, as are base hotel URLs without dates.
+
+### Is a residential proxy required?
+
+Yes. Skiplagged can return Cloudflare 403 responses to direct worker requests. The Actor automatically routes requests through Apify Residential Proxy, and this cannot be disabled. Your Apify account must have access to Residential Proxy.
 
 ### Can I collect reviews from multiple hotels?
 

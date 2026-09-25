@@ -1,6 +1,6 @@
 {
     "title": "Skiplagged Hotel Reviews Scraper",
-    "description": "Collect public reviews from one or more Skiplagged hotel URLs with sorting, filtering, result limits, pagination caps, and optional proxy settings.",
+    "description": "Collect public reviews from one or more Skiplagged hotel URLs with sorting, filtering, result limits, pagination caps, and mandatory Apify Residential Proxy routing.",
     "type": "object",
     "schemaVersion": 1,
     "properties": {
@@ -62,10 +62,11 @@
         "proxyConfiguration": {
             "title": "Proxy configuration",
             "type": "object",
-            "description": "Optional Apify Proxy or custom proxy configuration for protected network requests.",
+            "description": "Apify Residential Proxy is mandatory for Skiplagged requests and is enabled automatically. This Actor does not send requests directly.",
             "editor": "proxy",
             "default": {
-                "useApifyProxy": true
+                "useApifyProxy": true,
+                "apifyProxyGroups": ["RESIDENTIAL"]
             }
         }
     },
